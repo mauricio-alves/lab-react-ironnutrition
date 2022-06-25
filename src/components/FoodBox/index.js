@@ -20,7 +20,7 @@ export function FoodBox(food) {
           </b>
           kcal
         </p>
-        <Button type="primary"> Delete </Button>
+        <Button type="primary">Delete</Button>
       </Card>
     </Col>
   );

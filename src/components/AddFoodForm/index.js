@@ -1,7 +1,7 @@
 import { Divider, Input } from 'antd';
 import { useState } from 'react';
 
-export function AddFoodForm(food) {
+export function AddFoodForm({ food, setFood }) {
   const [newFood, setNewFood] = useState({
     name: '',
     calories: '',
@@ -11,12 +11,11 @@ export function AddFoodForm(food) {
 
   function handleFood(event) {
     setNewFood({ ...newFood, [event.target.name]: event.target.value });
-    console.log(newFood);
   }
 
   function addToFoodArray(event) {
     event.preventDefault();
-    // food.push(newFood);
+    setFood([...food, newFood]);
   }
 
   return (
