@@ -1,28 +1,8 @@
 import { Divider, Input } from 'antd';
-import { useState } from 'react';
 
-export function Search({ food, setFood }) {
-  const [search, setSearch] = useState({
-    name: '',
-  });
-
-  function handleSearch(event) {
-    setSearch({ ...search, [event.target.name]: event.target.value });
-
-    // food
-    //   .filter((food) => {
-    //     return food.name
-    //       .toLowerCase()
-    //       .includes(event.target.value.toLowerCase()) && setFood(...food, search);
-    //   })
-    //   .map((currentFood) => {
-    //     return {
-    //       name: currentFood.name,
-    //       calories: currentFood.calories,
-    //       image: currentFood.image,
-    //       servings: currentFood.servings,
-    //     };
-    //   });
+export function Search({ search, setSearch }) {
+  function handleChange(event) {
+    setSearch(event.target.value);
   }
 
   return (
@@ -33,9 +13,9 @@ export function Search({ food, setFood }) {
       <Input
         id="input-name"
         name="name"
-        value={search.name}
+        value={search}
         type="text"
-        onChange={handleSearch}
+        onChange={handleChange}
       />
     </>
   );

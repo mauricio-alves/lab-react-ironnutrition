@@ -6,28 +6,35 @@ import { Search } from './components/Search';
 import foods from './foods.json';
 
 export function App() {
-  const [food, setFood] = useState(foods);
+  const [allFoods, setAllFoods] = useState(foods);
+  const [search, setSearch] = useState('');
 
   return (
     <>
       <div className="App">
         <div>
-          <AddFoodForm food={food} setFood={setFood} />
-          <Search food={food} setFood={setFood}/>
+          <AddFoodForm allFoods={allFoods} setAllFoods={setAllFoods} />
+          <Search search={search} setSearch={setSearch} />
+
           <h2>Food List</h2>
+
           <div className="Content">
-            {food.map((currentFood) => {
-              return (
-                <FoodBox
-                  food={{
-                    name: currentFood.name,
-                    calories: currentFood.calories,
-                    image: currentFood.image,
-                    servings: currentFood.servings,
-                  }}
-                />
-              );
-            }).reverse()}
+            {allFoods
+              .filter((food) => {
+                return food.name.toLowerCase().includes(search.toLowerCase());
+              })
+              .map((food) => {
+                return (
+                  <div key={food.name}>
+                    <FoodBox
+                      food={food}
+                      allFoods={allFoods}
+                      setAllFoods={setAllFoods}
+                    />
+                  </div>
+                );
+              })
+              .reverse()}
           </div>
         </div>
       </div>

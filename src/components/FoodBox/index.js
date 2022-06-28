@@ -1,26 +1,32 @@
 import { Card, Col, Button } from 'antd';
 
-export function FoodBox(food) {
-  function multiply(a, b) {
-    return a * b;
+export function FoodBox({ food, allFoods, setAllFoods }) {
+  function handleDelete(foodSelect) {
+    setAllFoods(
+      allFoods.filter((food) => {
+        return food.name !== foodSelect;
+      })
+    );
   }
 
   return (
     <Col>
-      <Card
-        title={food.food.name}
-        style={{ width: 230, height: 300, margin: 10 }}
-      >
-        <img src={food.food.image} height={60} alt="food" />
-        <p>Calories: {food.food.calories}</p>
-        <p>Servings: {food.food.servings}</p>
+      <Card title={food.name} style={{ width: 230, height: 300, margin: 10 }}>
+        <img src={food.image} height={60} alt="food" />
+        <p>Calories: {food.calories}</p>
+        <p>Servings: {food.servings}</p>
         <p>
-          <b>
-            Total Calories:{' '}{multiply(food.food.calories, food.food.servings)}{' '}
-          </b>
+          <b>Total Calories: {food.calories * food.servings} </b>
           kcal
         </p>
-        <Button type="primary">Delete</Button>
+        <Button
+          type="primary"
+          onClick={() => {
+            handleDelete(food.name);
+          }}
+        >
+          Delete
+        </Button>
       </Card>
     </Col>
   );
