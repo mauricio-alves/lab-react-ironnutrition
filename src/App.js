@@ -8,12 +8,33 @@ import foods from './foods.json';
 export function App() {
   const [allFoods, setAllFoods] = useState(foods);
   const [search, setSearch] = useState('');
+  const [showForm, setShowForm] = useState(true);
+
+  // iteration 8
+  if (!allFoods.length) {
+    console.log('Oops! There is no more content to show.');
+    return;
+  }
 
   return (
     <>
       <div className="App">
-        <div>
+        {/* iteration 7*/}
+        {showForm && (
           <AddFoodForm allFoods={allFoods} setAllFoods={setAllFoods} />
+        )}
+        <div>
+          <Button
+            onClick={() => {
+              setShowForm(!showForm);
+            }}
+          >
+            {' '}
+            Hide Form / Add New Food{' '}
+          </Button>
+        </div>
+
+        <div>
           <Search search={search} setSearch={setSearch} />
 
           <h2>Food List</h2>
